@@ -19,21 +19,22 @@ type TokenInfo = record {
    total_supply : nat;
    symbol : text;
 };
+
 ```
 | Name | Description                                                                                                                                                                                                   |
 |------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |  decimals | Token decimals                                                                                                                                                                                                |
-|  flat_fee | Fixed fee judgment for transfer fee, if true, it is a fixed fee, false, it is charged according to the rate .                                                                                                 |
+|  flat_fee | If true, the transfer fee is a fixed fee; if false, the transfer fee will vary according to the rate user sets.                                                                                                                                                                                                 |
 |  owner | Token creator                                                                                                                                                                                                 |
-|  logo | Token logo address                                                                                                                                                                                            |
+|  logo | Token's logo address                                                                                                                                                                                            |
 |  name | Token name                                                                                                                                                                                                    |
-|  mint_on | true: can mint ; false: cannot mint                                                                                                                                                                           |
-|  platform_token_type | CERTIFICATION: token certified by the platform(offical); CREATETOKEN: token created by the platform; IMPORT: token imported by the user                                                                       |
-|  burn_rate | Burn fee, the fee will be put into the black hole address; if it is a fixed value(flat_burn_fee = true), the fee is an integer with precision; if it is a rate, It is an integer with 18 digits of precision. |
-|  fee_rate | Transfer fee, the fee will be deposited into the fee controller; if it is a fixed value(flat_fee = true), the fee is an integer with precision; if it is a rate, It is an integer with 18 digits of precision. |
+|  mint_on | true: mintable; false: non mintable                                                                                                                                                                           |
+|  platform_token_type | CERTIFICATION: token certified by the platform (offical); CREATETOKEN: token created on the platform; IMPORT: token imported by the user                                                                       |
+|  burn_rate | Burn fee: this fee will be put into the black hole address. If it's a fixed value (flat_burn_fee = true), the fee is an integer with precision; if it's a rate, it is an integer with 18 decimal places of precision. |
+|  fee_rate | Transfer fee: this fee will be deposited into the fee controller. If it's a fixed value (flat_fee = true), the fee is an integer with precision; if it's a rate, it is an integer with 18 decimal places of precision. |
 |  address | Token canister principal id                                                                                                                                                                                   |
-|  flat_burn_fee | Fixed fee judgment for burn fee, if true, it is a fixed fee, false, it is charged according to the rate.                                                                                                      |
-|  token_type | Token standards:DIP20, ICRC-1, ICRC-2                                                                                                                                                                         |
+|  flat_burn_fee | If true, the burn fee is a fixed fee; if false, the burn fee will vary according to the rate user sets.                                                                                                      |
+|  token_type | Token standards: DIP20, ICRC-1, ICRC-2                                                                                                                                                                         |
 |  total_supply | Deprecated                                                                                                                                                                                                    |
 |  symbol | Token symbol                                                                                                                                                                                                  |
 
@@ -82,12 +83,12 @@ type PoolStatus = variant {
 Only some of the required fields are listed
 
 | Name | Description                                                     |
-|-|-----------------------------------------------------------------|
-|  base_reserve |                                                                 |
-|  owner | Pool creator  PID                                               |
+|-----|-----------------------------------------------------------------|
+|  base_reserve |  The base token balance in the pool                                                               |
+|  owner | Pool creator's PID                                               |
 |  block_timestamp_last | Last trading time                                               |
 |  pool_addr | Pool canister address                                           |
-|  pool_type | Pool type: LPC:public pool, LPS:anchored pool, LPP:private pool |
+|  pool_type | LPC: public pool; LPS: anchored pool; LPP: private pool |
 | lp_fee_rate | The fee rate delivered to liquidity holders.                    |
 | base_token_decimals | base token decimals                                             |
 | quote_token_decimals | quote token decimals                                            |
@@ -95,8 +96,8 @@ Only some of the required fields are listed
 | base_price_cumulative_last | mid price                                                       |
 | quote_reserve | The quote token balance in the pool                             |
 | base_token | Base token canister principal id                                |
-| mt_fee_rate | Platform fee rate ,18 decimal places precision.                 |
-| is_single_pool | Is single pool.                                                 |
+| mt_fee_rate | Platform fee rate, 18 decimal places of precision.                 |
+| is_single_pool | Is single pool or not                                                 |
 
 ## Endpoint 3 - Swap token to token
 * Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
@@ -117,15 +118,15 @@ type Result_4 = variant { Ok : nat64; Err : text };
 
 * Request parameters:
 
-| Order | Name                             |
-|-|----------------------------------|
-| 1 | From token canister PID          |
-| 2 | To token canister PID            |
-| 3 | Trom token input amount.         |
-| 4 | To token minimum receive amount. |
-| 5 | Pool canister PID                |
-| 6 | Swap direction, 0 sell; 1 buy    |
-| 7 | Swap deadline, Nanoseconds       |
+| Order   | Name                             |
+|---------|----------------------------------|
+| 1       | From token canister PID          |
+| 2       | To token canister PID            |
+| 3       | From token input amount.         |
+| 4       | To token minimum receive amount. |
+| 5       | Pool canister PID                |
+| 6       | Swap direction, 0 sell; 1 buy    |
+| 7       | Swap deadline. Unit: nanoseconds       |
 
 * Response parameters: When Ok is returned, the SwapHash(u64) is also returned. The SwapHash is used to call `querySwapStatus` to confirm whether the swap is executed successfully.
 
@@ -175,10 +176,10 @@ type TransactionStatus = variant {
 | Name                                    | 	Description                                         |
 |-----------------------------------------|------------------------------------------------------|
 | to_token | 	To token canister PID                               |
-| status | 	Swap result status ,refer to type TransactionStatus |
+| status | 	Swap result status, refer to type TransactionStatus |
 | input_amount | 	From token input amount                             |
 | from_token | 	From token canister PID                             |
-| directions | 	0:sell 1:buy                                        |
+| directions | 	0: sell, 1: buy                                        |
 | base_reserve | 	The balance of base token in the pool               |
 | swap_hash_str | 	swap hash                                           |
 | volumn | 	swap volumn                                         |
@@ -188,7 +189,7 @@ type TransactionStatus = variant {
 | lp_fee_amount | 	LP fees charged by the liquidity provider           |
 | caller | 	The swap trader                                     |
 | pairs | 	The pool canister PID                               |
-| price | 	The price(USD) of ToToken                           |
+| price | 	The price (USD) of ToToken                           |
 | swap_hash | 	Swap hash id                                        |
 | fail_msg | 	Swap failure reasons                                |
 | mt_fee_amount | 	MT fees charged by the platform                     |
@@ -209,16 +210,16 @@ type Result_3 = variant {
 |-------|----------------------------------------|
   | 1| 	From token canister PID               |
   | 2| 	To token canister PID                 |
-  | 3| 	From token amount expected to be paid |
-  | 4| 	Deadline,nanoseconds                  |
+  | 3| 	From token: amount expected to be paid |
+  | 4| 	Deadline. Unit: nanoseconds                  |
 
 * Response parameters:
 
 | Order | 	Description                                       |
 |-------|----------------------------------------------------|
-| 1	    | The maximum ToToken amount expected to be received |
+| 1	    | ToToken: the maximum amount expected to be received |
 | 2	    | Recommended pool canister PID                      |
-| 3	    | Swap direction 0:sell 1:buy                        |
+| 3	    | Swap direction. 0: sell, 1: buy                        |
 | 4	    | Expected mt fee received                           |
 | 5	    | Expected lp fee received                           |
 
