@@ -1,4 +1,4 @@
-#### Fomo Well Adapter
+# Fomo Well Adapter
 ## Endpoint 1 - User Assert
 * URL: https://metrics.icpex.org/fomo/user/assert?id={userPrincipalId}
 * Example Request: https://metrics.icpex.org/fomo/user/assert?id=wwrdy-cndzb-b37zp-k32vz-ef73i-ef6pl-wnglw-hlra2-3y745-lfru5-aqe
