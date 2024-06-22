@@ -1,6 +1,6 @@
 ## Endpoint 1 - Token List
-* canister id: 24gqi-uyaaa-aaaam-ab5gq-cai
-* candid method:
+* Canister PID: 24gqi-uyaaa-aaaam-ab5gq-cai
+* Candid:
 ```candid
 getTokenInfo : () -> (vec TokenInfo) query;
 type TokenInfo = record {
@@ -20,28 +20,29 @@ type TokenInfo = record {
    symbol : text;
 };
 ```
-| Name | Description                                                                                                                                                                                                                                                                                                 |
-|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  decimals | Token decimals                                                                                                                                                                                                                                                                                              |
-|  flat_fee | Fixed fee judgment for transfer fee, if true, it is a fixed fee, false, it is charged according to the rate .                                                                                                                                                                                               |
-|  owner | Token creator                                                                                                                                                                                                                                                                                               |
-|  logo | Token logo address                                                                                                                                                                                                                                                                                          |
-|  name | Token name                                                                                                                                                                                                                                                                                                  |
-|  mint_on | true: can mint ; false: cannot mint                                                                                                                                                                                                                                                                         |
-|  platform_token_type | CERTIFICATION: token certified by the platform(offical); CREATETOKEN: token created by the platform; IMPORT: token imported by the user                                                                                                                                                                     |
-|  burn_rate | Burn fee, the fee will be put into the black hole address; if it is a fixed value(flat_burn_fee = true), the fee is an integer with precision; if it is a rate, It is an integer with 4 digits of precision for ICRC standard token. It is an integer with 18 digits of precision for DIP20 standard token  |
-|  fee_rate | Transfer fee, the fee will be deposited into the fee controller; if it is a fixed value(flat_fee = true), the fee is an integer with precision; if it is a rate, It is an integer with 4 digits of precision for ICRC standard token. It is an integer with 18 digits of precision for DIP20 standard token |
-|  address | Token canister principal id                                                                                                                                                                                                                                                                                 |
-|  flat_burn_fee | Fixed fee judgment for burn fee, if true, it is a fixed fee, false, it is charged according to the rate.                                                                                                                                                                                                    |
-|  token_type | Token standards:DIP20, ICRC-1, ICRC-2                                                                                                                                                                                                                                                                       |
-|  total_supply | Deprecated                                                                                                                                                                                                                                                                                                  |
-|  symbol | Token symbol                                                                                                                                                                                                                                                                                                |
+| Name | Description                                                                                                                                                                                                   |
+|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  decimals | Token decimals                                                                                                                                                                                                |
+|  flat_fee | Fixed fee judgment for transfer fee, if true, it is a fixed fee, false, it is charged according to the rate .                                                                                                 |
+|  owner | Token creator                                                                                                                                                                                                 |
+|  logo | Token logo address                                                                                                                                                                                            |
+|  name | Token name                                                                                                                                                                                                    |
+|  mint_on | true: can mint ; false: cannot mint                                                                                                                                                                           |
+|  platform_token_type | CERTIFICATION: token certified by the platform(offical); CREATETOKEN: token created by the platform; IMPORT: token imported by the user                                                                       |
+|  burn_rate | Burn fee, the fee will be put into the black hole address; if it is a fixed value(flat_burn_fee = true), the fee is an integer with precision; if it is a rate, It is an integer with 18 digits of precision. |
+|  fee_rate | Transfer fee, the fee will be deposited into the fee controller; if it is a fixed value(flat_fee = true), the fee is an integer with precision; if it is a rate, It is an integer with 18 digits of precision. |
+|  address | Token canister principal id                                                                                                                                                                                   |
+|  flat_burn_fee | Fixed fee judgment for burn fee, if true, it is a fixed fee, false, it is charged according to the rate.                                                                                                      |
+|  token_type | Token standards:DIP20, ICRC-1, ICRC-2                                                                                                                                                                         |
+|  total_supply | Deprecated                                                                                                                                                                                                    |
+|  symbol | Token symbol                                                                                                                                                                                                  |
 
 
 ## Endpoint 2 - Pool List
-* Canister id: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
 ```candid
-// input anonymous principal parameter  
+// request with anonymous principal  
 getPoolsInfo : (principal) -> (vec PoolInfo) query;
 type PoolInfo = record {
    i : nat;
@@ -97,9 +98,11 @@ Only some of the required fields are listed
 | mt_fee_rate | Platform fee rate ,18 decimal places precision.                 |
 | is_single_pool | Is single pool.                                                 |
 
-## Endpoint 3 - swapTokenToToken method
-canister id: 2ackz-dyaaa-aaaam-ab5eq-cai
+## Endpoint 3 - Swap token to token
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
 ```candid
+//Note: A wallet account is required to call this method
 swapTokenToToken : (
    principal,
    principal,
@@ -112,7 +115,7 @@ swapTokenToToken : (
 type Result_4 = variant { Ok : nat64; Err : text };
 ```
 
-* Input parameters:
+* Request parameters:
 
 | Order | Name                             |
 |-|----------------------------------|
@@ -123,4 +126,114 @@ type Result_4 = variant { Ok : nat64; Err : text };
 | 5 | Pool canister PID                |
 | 6 | Swap direction, 0 sell; 1 buy    |
 | 7 | Swap deadline, Nanoseconds       |
+
+* Response parameters: When Ok is returned, the SwapHash(u64) is also returned. The SwapHash is used to call `querySwapStatus` to confirm whether the swap is executed successfully.
+
+
+## Endpoint 4 - Query swap status.
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+querySwapStatus : (nat64) -> (vec SwapTxRecord) query;
+type SwapTxRecord = record {
+   to_token : opt principal;
+   status : TransactionStatus;
+   input_amount : opt float64;
+   from_token : opt principal;
+   directions : opt nat64;
+   base_reserve : opt float64;
+   lp_fee_volumn : opt float64;
+   swap_hash_str : text;
+   volumn : opt float64;
+   receive_amount : opt float64;
+   quote_token_decimals : opt nat;
+   mt_fee_volumn : opt float64;
+   base_min_return_amount : opt float64;
+   timestamp : nat64;
+   base_price_cumulative_last : opt float64;
+   quote_reserve : opt float64;
+   lp_fee_amount : opt float64;
+   caller : opt principal;
+   pairs : opt vec principal;
+   price : opt float64;
+   swap_hash : nat64;
+   fail_msg : opt text;
+   mt_fee_amount : opt float64;
+};
+type TransactionStatus = variant {
+   Failed;
+   Succeeded;
+   BaseTrans;
+   QuoteTrans;
+   Rollback;
+   Pending;
+};
+```
+* Request parameter: SwapHash(u64)
+* Response parameter: Only some of the required fields are listed
+
+| Name                                    | 	Description                                         |
+|-----------------------------------------|------------------------------------------------------|
+| to_token | 	To token canister PID                               |
+| status | 	Swap result status ,refer to type TransactionStatus |
+| input_amount | 	From token input amount                             |
+| from_token | 	From token canister PID                             |
+| directions | 	0:sell 1:buy                                        |
+| base_reserve | 	The balance of base token in the pool               |
+| swap_hash_str | 	swap hash                                           |
+| volumn | 	swap volumn                                         |
+| receive_amount | 	The amount received by the swap trader              |
+| quote_token_decimals | 	Quote token decimals                                |
+| quote_reserve | 	The balance of quote token in the pool              |
+| lp_fee_amount | 	LP fees charged by the liquidity provider           |
+| caller | 	The swap trader                                     |
+| pairs | 	The pool canister PID                               |
+| price | 	The price(USD) of ToToken                           |
+| swap_hash | 	Swap hash id                                        |
+| fail_msg | 	Swap failure reasons                                |
+| mt_fee_amount | 	MT fees charged by the platform                     |
+
+## Endpoint 5 - Smart route.
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+quote : (principal, principal, nat, nat64) -> (Result_3) query;
+type Result_3 = variant {
+   Ok : record { nat; vec principal; nat8; nat; nat };
+   Err : text;
+};
+```
+* Request parameters:
+
+| Order | 	Description                           |
+|-------|----------------------------------------|
+  | 1| 	From token canister PID               |
+  | 2| 	To token canister PID                 |
+  | 3| 	From token amount expected to be paid |
+  | 4| 	Deadline,nanoseconds                  |
+
+* Response parameters:
+
+| Order | 	Description                                       |
+|-------|----------------------------------------------------|
+| 1	    | The maximum ToToken amount expected to be received |
+| 2	    | Recommended pool canister PID                      |
+| 3	    | Swap direction 0:sell 1:buy                        |
+| 4	    | Expected mt fee received                           |
+| 5	    | Expected lp fee received                           |
+
+## Endpoint 6 - Sub-wallet withdrawal
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+  //Note: A wallet account is required to call this method
+  withdrawSubAccountToken : (principal, nat) -> (Result_2);
+  type Result_2 = variant { Ok; Err : text };
+```
+* Request parameters:
+
+| Order | 	Description                 |
+|-------|------------------------------|
+| 1     | 	Withdraw token canister PID |
+| 2     | 	Withdraw amount             |
 
