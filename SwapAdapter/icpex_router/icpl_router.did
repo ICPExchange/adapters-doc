@@ -48,7 +48,7 @@ service : (principal, principal) -> {
       nat64,
       nat64,
     ) -> (Result_4);
-    platformWithdraw : (nat, principal, principal) -> (Result_2);
+    withdrawSubAccountToken : (principal, nat) -> (Result_2);
     getPoolsInfo : (principal) -> (vec PoolInfo) query;
     quote : (principal, principal, nat, nat64) -> (Result_3) query;
 }
