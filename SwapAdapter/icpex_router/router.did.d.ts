@@ -1,3 +1,6 @@
+import type { Principal } from '@dfinity/principal';
+import type { ActorMethod } from '@dfinity/agent';
+
 export type Result_2 = { 'Ok' : null } |
   { 'Err' : string };
 export type Result_3 = {
