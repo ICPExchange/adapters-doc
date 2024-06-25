@@ -1,0 +1,34 @@
+type SwapTxRecord = record {
+  to_token : opt principal;
+  status : TransactionStatus;
+  input_amount : opt float64;
+  from_token : opt principal;
+  directions : opt nat64;
+  lp_fee_volumn : opt float64;
+  swap_hash_str : text;
+  volumn : opt float64;
+  receive_amount : opt float64;
+  quote_token_decimals : opt nat;
+  mt_fee_volumn : opt float64;
+  base_min_return_amount : opt float64;
+  timestamp : nat64;
+  lp_fee_amount : opt float64;
+  caller : opt principal;
+  pairs : opt vec principal;
+  price : opt float64;
+  swap_hash : nat64;
+  fail_msg : opt text;
+  mt_fee_amount : opt float64;
+};
+
+type TransactionStatus = variant {
+  Failed;
+  Succeeded;
+  BaseTrans;
+  QuoteTrans;
+  Rollback;
+  Pending;
+};
+service : () -> {
+  querySwapStatus : (nat64) -> (vec SwapTxRecord) query;
+}
