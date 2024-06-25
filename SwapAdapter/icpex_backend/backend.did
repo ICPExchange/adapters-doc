@@ -1,0 +1,20 @@
+type TokenInfo = record {
+  decimals : nat;
+  flat_fee : bool;
+  owner : principal;
+  logo : text;
+  name : text;
+  mint_on : bool;
+  platform_token_type : text;
+  burn_rate : nat;
+  fee_rate : nat;
+  address : principal;
+  flat_burn_fee : bool;
+  token_type : text;
+  total_supply : nat;
+  symbol : text;
+};
+
+service : (principal, principal, nat, principal) -> {
+    getTokenInfo : () -> (vec TokenInfo) query;
+}
