@@ -132,7 +132,7 @@ type Result_4 = variant { Ok : nat64; Err : text };
 
 
 ## Endpoint 4 - Query swap status.
-* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Canister PID: 2jbbf-vqaaa-aaaam-ab5fa-cai
 * Candid:
 ```candid
 querySwapStatus : (nat64) -> (vec SwapTxRecord) query;
