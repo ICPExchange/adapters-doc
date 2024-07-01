@@ -57,7 +57,7 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 
 ## Endpoint 4 - Events
 * Request: GET /events?fromBlock=:number&toBlock=:number
-* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/events?fromBlock=8382&toBlock=8383
+* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/events?fromBlock={fromBlockId}&toBlock={toBlockId}
 * Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/events?fromBlock=8382&toBlock=8383
 * Example Response:
   ```json
