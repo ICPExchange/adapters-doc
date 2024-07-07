@@ -3,6 +3,7 @@
 Web front-end services.
 * Canister Id: [gdz52-oaaaa-aaaam-ab7ea-cai](https://dashboard.internetcomputer.org/canister/gdz52-oaaaa-aaaam-ab7ea-cai)
 * Website: https://gdz52-oaaaa-aaaam-ab7ea-cai.icp0.io/
+* Domain: https://icpex.org/
 
 ## Backend
 Token creation, query and other management services.
