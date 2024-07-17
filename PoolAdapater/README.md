@@ -55,7 +55,7 @@
 
 | Order | Name            | 	Description                                                  |
 |-------|-----------------|---------------------------------------------------------------|
-| 1     | shares| 	The canisterId of the pool to which liquidity is to be added |
+| 1     | shares| 	The amount of LP  |
 | 2     | base_adjusted_in_amount  | 	The actual amount of base token required to add liquidity    |
 | 3     | quote_adjusted_in_amount | 	The actual amount of quote token required to add liquidity   |
 
