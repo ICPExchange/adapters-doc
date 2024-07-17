@@ -55,7 +55,7 @@
 
 | Order | Name            | 	Description                                                  |
 |-------|-----------------|---------------------------------------------------------------|
-| 1     | shares| 	The amount of LP  |
+| 1     | shares| 	The actual amount of LP used for adding liquidity.    |
 | 2     | base_adjusted_in_amount  | 	The actual amount of base token required to add liquidity    |
 | 3     | quote_adjusted_in_amount | 	The actual amount of quote token required to add liquidity   |
 
