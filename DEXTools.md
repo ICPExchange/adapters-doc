@@ -9,7 +9,7 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 {
   "block": {
     "blockNumber": 16016,
-    "blockTimestamp": 1.718939931406123e+18
+    "blockTimestamp": 1721352834310735461
   }
 }
 ```
@@ -35,7 +35,7 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 
 ## Endpoint 3 - Pair
 * Request: GET /pair_dextools?id=:string
-* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/pair_dextools?id={poolCanisterId}
+* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/pair?id={poolCanisterId}
 * Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/pair_dextools?id=ivvqh-baaaa-aaaam-acf4a-cai
 * Example Response:
 ```json
@@ -101,8 +101,8 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 ```json
 {
     "block": {
-        "blockNumber": <block-number>,
-        "blockTimestamp": <block-timestamp>
+        "blockNumber": 7127,
+        "blockTimestamp": 1721352834310735461
     }
 }
 ```
