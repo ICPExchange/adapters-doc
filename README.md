@@ -1,4 +1,4 @@
-# ICPEx fullly-on-chain-canisters
+<img width="613" alt="image" src="https://github.com/user-attachments/assets/04fba1d7-3a2d-4de4-94ea-c5f90874a12e"># ICPEx fullly-on-chain-canisters
 ## Web-assets
 Web front-end services.
 * Canister Id: [gdz52-oaaaa-aaaam-ab7ea-cai](https://dashboard.internetcomputer.org/canister/gdz52-oaaaa-aaaam-ab7ea-cai)
@@ -24,6 +24,7 @@ Pool creation, PPM algorithm integration, liquidity addition and deletion, swap 
 # Adapters
 * [CoinGecko](CoinGecko.md)
 * [DEX Screener](DEXScreener.md)
+* [DEX Tools](DEXTools.md)
 * [Defi Llama](DefiLlama.md)
 * [Fomowell](FomoWell.md)
 * [SwapAdapter](./SwapAdapter/README.md)
