@@ -1,4 +1,4 @@
-<img width="613" alt="image" src="https://github.com/user-attachments/assets/04fba1d7-3a2d-4de4-94ea-c5f90874a12e"># ICPEx fullly-on-chain-canisters
+# ICPEx fullly-on-chain-canisters
 ## Web-assets
 Web front-end services.
 * Canister Id: [gdz52-oaaaa-aaaam-ab7ea-cai](https://dashboard.internetcomputer.org/canister/gdz52-oaaaa-aaaam-ab7ea-cai)
