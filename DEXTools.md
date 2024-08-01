@@ -34,9 +34,9 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 ```
 
 ## Endpoint 3 - Pair
-* Request: GET /pair_dextools?id=:string
+* Request: GET /pair?id=:string
 * URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/pair?id={poolCanisterId}
-* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/pair_dextools?id=ivvqh-baaaa-aaaam-acf4a-cai
+* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/pair?id=ivvqh-baaaa-aaaam-acf4a-cai
 * Example Response:
 ```json
 {
