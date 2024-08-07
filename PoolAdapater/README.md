@@ -60,10 +60,65 @@
 | 3     | quote_adjusted_in_amount | 	The actual amount of quote token required to add liquidity   |
 
 
-## 2. Transfer LP
+
+## 2. Removing LP
 ### 2.1 Description
+Removing liquidity endpoint.
+### 2.2 Endpoint - querySellShares
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+  querySellShares : (nat, principal, principal) -> (nat, nat, nat, nat) query;
+```
+* Request parameters:
+
+  
+| Order | Name            | 	Description                                                                                                                    |
+|-------|-----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| 1     | share_rate       | 	Proportion to be removed.  |
+| 2     | owner  | 	The PID of the user holding the LP.                                                                             |
+| 3     | pool_addr  | 	The canister ID of the pool where the LP needs to be removed.        |
+
+
+* Response parameters:
+
+| Order | Name            | 	Description                                                  |
+|-------|-----------------|---------------------------------------------------------------|
+| 1     | base_amount| 	The amount of base token to be removed.    |
+| 2     | quote_amount  | 	The amount of quote token to be removed.   |
+| 3     | lp_amount | 	The amount of LP to be removed.   |
+| 4     | total_lp_amount | 	The actual amount of the total LP.   |
+
+### 2.3 Endpoint - sellShares
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+    sellShares : (nat, principal, nat, nat, nat, nat64) -> (nat, nat);
+```
+* Request parameters:
+
+  
+| Order | Name            | 	Description                                                                                                                    |
+|-------|-----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| 1     | share_amount       | 	The amount of LP to be removed.   |
+| 2     | pool_addr  | 		The canister ID of the pool where the LP needs to be removed.                                                                              |
+| 3     | base_amount  | 	The amount of baseToken  want to receive.        |
+| 4     | quote_amount  | 	The amount of quoteToken want to receive.       |
+| 5     | slippage  | 	Slippage, 18 decimal        |
+| 6     | deadline  | 	Unit: nanosecond.      |
+
+
+* Response parameters:
+
+| Order | Name            | 	Description                                                  |
+|-------|-----------------|---------------------------------------------------------------|
+| 1     | receive_base_amount| 	Base amount received    |
+| 2     | receive_quote_amount  | 	Quote amount received   |
+
+## 3. Transfer LP
+### 3.1 Description
 Use this endpoint to transfer own LP to another user's.
-### 2.1 Endpoint
+### 3.2 Endpoint
 * Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
 * Candid:
 ```candid
@@ -78,3 +133,23 @@ Use this endpoint to transfer own LP to another user's.
 | 1     | pool_addr       | 	The canister ID of the pool where the LP needs to be transferred.  |
 | 2     | to  | 	The PID of the user receiving the LP.                                                                             |
 | 3     | transfer_percent  | 	The ratio of LP being transferred, with a precision of 18. For example, the number for 50% would be 500000000000000000.        |
+
+
+## 4. Lock LP
+### 4.1 Description
+Use this endpoint to lock own LP. LP will be transferred to the blackhole address(aaaaa-aa)
+### 4.2 Endpoint
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+      type Result_2 = variant { Ok; Err : text };
+      lockLiquidity : (principal, nat, nat64) -> (Result_2);
+```
+* Request parameters:
+
+| Order | Name            | 	Description                                                                                                                    |
+|-------|-----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| 1     | pool_addr       | 	The canister ID of the pool where the LP needs to be locked.  |
+| 2     | lock_percent  | 	The ratio of LP being locked, with a precision of 18. For example, the number for 50% would be 500000000000000000.        |
+| 3     | expire_time  | 	Currently only supports 0, which means permanent lock.                                                                           |
+
