@@ -59,3 +59,22 @@
 | 2     | base_adjusted_in_amount  | 	The actual amount of base token required to add liquidity    |
 | 3     | quote_adjusted_in_amount | 	The actual amount of quote token required to add liquidity   |
 
+
+## 2. Transfer LP
+### 2.1 Description
+Use this endpoint to transfer own LP to another user's.
+### 2.1 Endpoint
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+      type Result_2 = variant { Ok; Err : text };
+      transferLiquidity : (principal, principal, nat) -> (Result_2);
+```
+* Request parameters:
+
+  
+| Order | Name            | 	Description                                                                                                                    |
+|-------|-----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| 1     | pool_addr       | 	The canister ID of the pool where the LP needs to be transferred.  |
+| 2     | to  | 	The PID of the user receiving the LP.                                                                             |
+| 3     | transfer_percent  | 	The ratio of LP being transferred, with a precision of 18. For example, the number for 50% would be 500000000000000000.        |
