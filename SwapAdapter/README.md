@@ -1,3 +1,15 @@
+# ICPExchange exchange adapter
+To complete an exchange on the endpoint, you only need to follow two steps:
+
+1. Call the `approve`/`icrc2_approve` endpoint of the token canister to approve the transaction amount for the ICPEx router canister.
+
+   - **Note 1:** ICRC1 does not have an `approve` method. ICPEx has replaced the `approve` function by creating a sub-account for the user on the router canister.
+
+   - **Note 2:** The `approve` operation does not provide any information about prices or expected trading pairs, so the bot cannot infer the user's trading intent.
+
+2. Call the `swapTokenToToken` endpoint to execute the exchange in a single step. The user deposits the `fromToken` into the pool canister, and the liquidity pool will return the swapped tokens to the user.
+   - **Note 1:** The exchange order submitted to the router will be executed sequentially within the subnet in a predefined order. The bot has no way of knowing the order's contents, and even if it did, it would be rejected due to slippage since it would be later than the user's submission.
+
 ## Endpoint 1 - Token List
 * Canister PID: 24gqi-uyaaa-aaaam-ab5gq-cai
 * Candid:
