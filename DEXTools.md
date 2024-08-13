@@ -9,7 +9,7 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 {
   "block": {
     "blockNumber": 16016,
-    "blockTimestamp": 1721352834310735461
+    "blockTimestamp": 1721352834
   }
 }
 ```
@@ -57,9 +57,9 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 ```
 
 ## Endpoint 4 - Events
-* Request: GET /events?fromBlock=:number&toBlock=:number
-* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/events?fromBlock={fromBlockId}&toBlock={toBlockId}
-* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/events?fromBlock=8382&toBlock=8383
+* Request: GET /dextools-events?fromBlock=:number&toBlock=:number
+* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools-events?fromBlock={fromBlockId}&toBlock={toBlockId}
+* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools-events?fromBlock=8382&toBlock=8383
 * Example Response:
   ```json
   {
@@ -67,7 +67,7 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
       {
         "block": {
           "blockNumber": 8382,
-          "blockTimestamp": 1.716858194019336e+18
+          "blockTimestamp": 1721352834
         },
         "eventType": "swap",
         "txnId": "8753553651592981317",
@@ -102,7 +102,7 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 {
     "block": {
         "blockNumber": 7127,
-        "blockTimestamp": 1721352834310735461
+        "blockTimestamp": 1721352834
     }
 }
 ```
