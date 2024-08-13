@@ -2,8 +2,8 @@
 Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screener-Adapter-Specs-cc1223cdf6e74a7799599106b65dcd0e)
 
 ## Endpoint 1 - Latest Block
-* Request: GET `/latest-block`
-* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/latest-block
+* Request: GET `/dextools-latest-block`
+* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools-latest-block
 * Example Response:
 ```json
 {
@@ -94,9 +94,9 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 
 
 ## Endpoint 5 - Block
-* Request: GET /block?number=:number
-* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/block?number={block_number}
-* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/block?number=10000
+* Request: GET /dextools-block?number=:number
+* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools-block?number={block_number}
+* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools-block?number=10000
 * Example Response:
 ```json
 {
