@@ -1,5 +1,5 @@
 # DEXTools Adapter
-Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screener-Adapter-Specs-cc1223cdf6e74a7799599106b65dcd0e)
+Refer to [DEXTools Adapter Specs](https://github.com/dextools-io/api-contracts/tree/main/http-adapter)
 
 ## Endpoint 1 - Latest Block
 * Request: GET `/dextools/latest-block`
@@ -14,9 +14,9 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
 }
 ```
 ## Endpoint 2 - Asset
-* Request: GET /asset?id=:string
-* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/asset?id={tokenCanisterId}
-* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/asset?id=ryjl3-tyaaa-aaaaa-aaaba-cai
+* Request: GET /dextools/asset?id=:string
+* URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools/asset?id={tokenCanisterId}
+* Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools/asset?id=ryjl3-tyaaa-aaaaa-aaaba-cai
 * Example Response: 
 ```json
 {
