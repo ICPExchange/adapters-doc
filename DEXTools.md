@@ -94,8 +94,20 @@ Refer to [DEXTools Adapter Specs](https://github.com/dextools-io/api-contracts/t
 
 
 ## Endpoint 5 - Block
+For timestamp searching, this endpoint should return the youngest block with the timestamp less than or equal
+to the requested one.
+
+If none of the parameters are requested, this endpoint must return a 400 error.
+
+If both parameters are requested, number option takes precedence.
+
 * Request: GET /dextools/block?number=:number
 * URL: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools/block?number={block_number}
+* Request parameter:
+```txt
+number?: integer
+timestamp?: integer
+```
 * Example Request: https://2jbbf-vqaaa-aaaam-ab5fa-cai.raw.icp0.io/dextools/block?number=10000
 * Example Response:
 ```json
