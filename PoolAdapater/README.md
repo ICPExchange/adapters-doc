@@ -153,3 +153,74 @@ Use this endpoint to lock own LP. LP will be transferred to the blackhole addres
 | 2     | lock_percent  | 	The ratio of LP being locked, with a precision of 18. For example, the number for 50% would be 500000000000000000.        |
 | 3     | expire_time  | 	Currently only supports 0, which means permanent lock.                                                                           |
 
+
+## 5. Query LP
+### 5.1 Description
+Query the amount of LP shares the user holds in the respective pool.
+### 5.2 Endpoint
+* Canister PID: 2ackz-dyaaa-aaaam-ab5eq-cai
+* Candid:
+```candid
+  getPoolInfo : (principal, principal) -> (PoolInfo) query;
+  type PoolInfo = record {
+    i : nat;
+    k : nat;
+    base_reserve : nat;
+    owner : principal;
+    block_timestamp_last : nat64;
+    pool_addr : principal;
+    lp_amount : nat;
+    pool_type : text;
+    lp_lock : nat;
+    quote_user : nat;
+    lp_fee_rate : nat;
+    base_token_decimals : nat8;
+    quote_token_decimals : nat8;
+    base_user : nat;
+    quote_token : principal;
+    base_price_cumulative_last : nat;
+    quote_reserve : nat;
+    base_token : principal;
+    pool_status : PoolStatus;
+    mt_fee_rate : nat;
+    is_single_pool : bool;
+    total_supply : nat;
+    is_my_pool : bool;
+  };
+```
+* Request parameters:
+
+
+| Order | Name            | 	Description                                                                                                                    |
+|-------|-----------------|---------------------------------------------------------------------------------------------------------------------------------|
+| 1     | pool_addr       | 	The canister ID of the pool where the LP needs to be locked.  |
+| 2     | query_user  | 	The principal of the query user      |
+
+
+* Response parameters:
+
+| Order | Name                         | Description                                                                 |
+|-------|------------------------------|-----------------------------------------------------------------------------|
+| 1     | i                            | i is the initial guide price.                                           |
+| 2     | k                            | k is the volatility coefficient.|
+| 3     | base_reserve                  | The amount of base tokens in the pool.                                 |
+| 4     | owner                         | The principal of the pool's creator.                             |
+| 5     | block_timestamp_last          | The timestamp of the last block when an action occurred in the pool.         |
+| 6     | pool_addr                     | The principal of the pool's address.                           |
+| 7     | lp_amount                     | The amount of LP shares the user holds in the pool.                          |
+| 8     | pool_type                     | The type of pool (e.g., LPC,LPS,LPP).                         |
+| 9     | lp_lock                       | The amount of LP shares that are locked.                                    |
+| 10    | quote_user                    | The amount of quote tokens the user has in the pool.                        |
+| 11    | lp_fee_rate                   | The liquidity provider fee rate for the pool.                               |
+| 12    | base_token_decimals           | The number of decimals for the base token.                                  |
+| 13    | quote_token_decimals          | The number of decimals for the quote token.                                 |
+| 14    | base_user                     | The amount of base tokens the user has in the pool.                         |
+| 15    | quote_token                   | The principal of the quote token.                              |
+| 16    | base_price_cumulative_last    | The last price of the base token.                                |
+| 17    | quote_reserve                 | The amount of quote tokens in the pool.                                |
+| 18    | base_token                    | The principal of the base token.                               |
+| 19    | pool_status                   | The current status of the pool.                      |
+| 20    | mt_fee_rate                   | The DEX fee rate for the pool.                                   |
+| 21    | is_single_pool                | Boolean indicating whether this is a single-token pool.                     |
+| 22    | total_supply                  | The total supply of LP shares for the pool.                                 |
+| 23    | is_my_pool                    | Boolean indicating whether this pool was created by the user.                   |
