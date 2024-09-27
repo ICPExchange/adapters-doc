@@ -124,6 +124,7 @@ Use this endpoint to transfer own LP to another user's.
 ```candid
       type Result_2 = variant { Ok; Err : text };
       transferLiquidity : (principal, principal, nat) -> (Result_2);
+      transferLiquidityV2: (principal, principal, nat) → (variant {Ok:nat; Err:text}) 
 ```
 * Request parameters:
 
@@ -134,6 +135,8 @@ Use this endpoint to transfer own LP to another user's.
 | 2     | to  | 	The PID of the user receiving the LP.                                                                             |
 | 3     | transfer_percent  | 	The ratio of LP being transferred, with a precision of 18. For example, the number for 50% would be 500000000000000000.        |
 
+* Response parameters:</br>
+If using `transferLiquidityV2`, it will return transferred LP shares in Ok.
 
 ## 4. Lock LP
 ### 4.1 Description
@@ -144,6 +147,7 @@ Use this endpoint to lock own LP. LP will be transferred to the blackhole addres
 ```candid
       type Result_2 = variant { Ok; Err : text };
       lockLiquidity : (principal, nat, nat64) -> (Result_2);
+      lockLiquidityV2: (principal, nat, nat64) → (variant {Ok:nat; Err:text}) 
 ```
 * Request parameters:
 
@@ -153,6 +157,8 @@ Use this endpoint to lock own LP. LP will be transferred to the blackhole addres
 | 2     | lock_percent  | 	The ratio of LP being locked, with a precision of 18. For example, the number for 50% would be 500000000000000000.        |
 | 3     | expire_time  | 	Currently only supports 0, which means permanent lock.                                                                           |
 
+* Response parameters:</br>
+If using `lockLiquidityV2`, it will return locked LP shares in Ok.
 
 ## 5. Query LP
 ### 5.1 Description
