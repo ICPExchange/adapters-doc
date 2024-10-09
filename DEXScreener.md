@@ -28,7 +28,8 @@ Refer to [DEX Screener Adapter Specs](https://dexscreener.notion.site/DEX-Screen
     "circulatingSupply": 519998453.181276,
     "coinGeckoId": null,
     "coinMarketCapId": null,
-    "metadata": null
+    "metadata": null,
+    "decimals": 8
   }
 }
 ```
